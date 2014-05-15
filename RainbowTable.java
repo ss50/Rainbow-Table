@@ -22,7 +22,8 @@ public class RainbowTable {
 
 	byte[] res;
 	final int NUM_CHARACTERS = 4;
-	char[] characters = new char[]{'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
+	String password_space = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwqyz0123456789";
+	char[] characters = password_space.toCharArray();
 	BigInteger passwordSpaceSize;
 	BigInteger charactersLength;
 	
@@ -44,14 +45,14 @@ public class RainbowTable {
 			e.printStackTrace();
 		}				
 		generatePasswords(passwds, characters, "", characters.length, NUM_CHARACTERS);
-		//System.out.println("Size of possible passwords: " + passwds.size());
+		System.out.println("Size of password space: " + passwds.size());
 		String filename = "table" + numChains+"x"+chainLength+".txt";
 		if(!readFromFile(filename)) {
 			long startTime = System.currentTimeMillis();
 			buildTable(numChains, chainLength);
 			System.out.println("Building table took: " + ((double)(System.currentTimeMillis()-startTime)/1000) + " s");
 			startTime = System.currentTimeMillis();
-			getAverageLookupTime(100);
+			//getAverageLookupTime(100);
 			writeToFile(filename);
 		}
 		else{
